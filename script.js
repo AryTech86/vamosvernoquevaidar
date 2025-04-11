@@ -1,103 +1,54 @@
-// PARTE 1: Lista de perguntas e respostas
-perguntas = [
+const perguntas = [
   {
-    pergunta: "Qual nome da capital de Paraíba?",
-    respostas: [
-      {opcao: "Salvador", correto: false},
-      {opcao: "Rio de Janeiro", correto: false},
-      {opcao: "João Pessoa", correto: true}]
-    },
-  {
-    pergunta: "Qual cidade da Paraíba é amplamente reconhecida por realizar O Maior São João do Mundo?",
-    respostas: [
-      {opcao: "Patos", correto: false},
-      {opcao: "Campina Grande", correto: true},
-      {opcao: "Solânea", correto: false}]
-    },
-  {
-    pergunta: "Qual comida regional típica do nordeste, virou Patrimônio Cultural Imaterial da Humanidade?",
-    respostas: [
-      {opcao: "Cuscuz", correto: true},
-      {opcao: "Baião de Dois", correto: false},
-      {opcao: "Buchada", correto: false}]
-    },
-  {
-    pergunta: "Quem foi Luiz Gonzaga?",
-    respostas: [
-      {opcao: "Um pintor", correto: false},
-      {opcao: "Um padeiro", correto: false},
-      {opcao: "Um cantor", correto: true}]
-    },
-  {
-    pergunta: "Qual das seguintes manifestações culturais é tipicamente assossiada a região Nordeste do Brasil?",
-    respostas: [
-      {opcao: "Tango", correto: false},
-      {opcao: "Frevo", correto: true},
-      {opcao: "Bumba Meu Boi", correto: false}]
-    }
+    pergunta: "Qual cidade é conhecida como a 'Rainha do Brejo'?",
+    opcoes: ["Campina Grande", "Bananeiras", "Guarabira", "Sousa"],
+    resposta: "Guarabira",
+    curiosidade: "Guarabira é considerada a Rainha do Brejo por sua influência cultural e econômica na região."
+  }
 ];
 
-// PARTE 2: Pegando os elementos do HTML
-const perguntaElemento = document.querySelector(".pergunta");
-const respostasElemento = document.querySelector(".respostas");
-const progressoElemento = document.querySelector(".progresso");
-const textoFinal = document.querySelector(".fim span");
-const conteudo = document.querySelector(".conteudo");
-const conteudoFinal = document.querySelector(".fim");
+let indiceAtual = 0;
 
-// PARTE 3: Variáveis para controle do jogo
-let indiceAtual = 0; // Índice da pergunta atual
-let acertos = 0; // Contador de acertos
-
-// PARTE 4: Função para carregar uma nova pergunta
 function carregarPergunta() {
-  progressoElemento.innerHTML = `${indiceAtual + 1}/${perguntas.length}`; // Atualiza o progresso
-  const perguntaAtual = perguntas[indiceAtual]; // Pega a pergunta atual
-  perguntaElemento.innerHTML = perguntaAtual.pergunta; // Exibe a pergunta
+  const p = perguntas[indiceAtual];
+  document.getElementById('pergunta').textContent = p.pergunta;
 
-  respostasElemento.innerHTML = ""; // Limpa as respostas anteriores
+  const opcoesDiv = document.getElementById('opcoes');
+  opcoesDiv.innerHTML = "";
 
-  // Percorre todas as respostas da pergunta atual
-  for (let i = 0; i < perguntaAtual.respostas.length; i++) {
-    // Pega a resposta atual com base no índice 'i'
-    const resposta = perguntaAtual.respostas[i];
-    // Cria um novo elemento 'button' (botão)
-    const botao = document.createElement("button");
-    // Adiciona a classe CSS 'botao-resposta' ao botão para estilizar
-    botao.classList.add("botao-resposta");
-    // Define o texto do botão com a opção de resposta (resposta.opcao)
-    botao.innerText = resposta.opcao;
-    // Adiciona um evento de clique no botão
-    botao.onclick = function () {
-      // Se a resposta for correta (resposta.correto === true), incrementa o número de acertos
-      if (resposta.correto) {
-        acertos = acertos;
-        acertos++; // Incrementa o contador de acertos
-      }
+  p.opcoes.forEach(opcao => {
+    const botao = document.createElement('button');
+    botao.textContent = opcao;
+    botao.onclick = () => verificarResposta(opcao);
+    opcoesDiv.appendChild(botao);
+  });
 
-      // Avança para a próxima pergunta
-      indiceAtual++;
+  document.getElementById('resposta').textContent = "";
+  document.getElementById('proxima').style.display = "none";
+}
 
-      // Se ainda houver perguntas, carrega a próxima pergunta
-      if (indiceAtual < perguntas.length) {
-        carregarPergunta(); // Carrega a próxima pergunta
-      } else {
-        // Se não houver mais perguntas, finaliza o jogo
-        finalizarJogo();
-      }
-    };
-
-    // Adiciona o botão de resposta à tela, dentro do elemento 'respostasElemento'
-    respostasElemento.appendChild(botao);
+function verificarResposta(opcaoEscolhida) {
+  const p = perguntas[indiceAtual];
+  const resultado = document.getElementById('resposta');
+  if (opcaoEscolhida === p.resposta) {
+    resultado.innerHTML = "✅ Acertou!<br><em>" + p.curiosidade + "</em>";
+  } else {
+    resultado.innerHTML = "❌ Errou! A resposta certa é: " + p.resposta;
   }
+
+  document.getElementById('proxima').style.display = "block";
 }
 
-// PARTE 5: Função para mostrar a tela final
-function finalizarJogo() {
-  textoFinal.innerHTML = `Você acertou ${acertos} de ${perguntas.length}!`; // Exibe o resultado
-  conteudo.style.display = "none"; // Esconde as perguntas
-  conteudoFinal.style.display = "flex"; // Mostra a tela final
-}
+document.getElementById('proxima').onclick = () => {
+  indiceAtual++;
+  if (indiceAtual < perguntas.length) {
+    carregarPergunta();
+  } else {
+    document.getElementById('pergunta').textContent = "Fim do jogo!";
+    document.getElementById('opcoes').innerHTML = "";
+    document.getElementById('resposta').textContent = "Parabéns por jogar!";
+    document.getElementById('proxima').style.display = "none";
+  }
+};
 
-// PARTE 6: Iniciando o jogo pela primeira vez
 carregarPergunta();
