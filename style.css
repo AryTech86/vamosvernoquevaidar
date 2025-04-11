@@ -18,19 +18,20 @@ body {
 }
 
 .options button {
-  margin: 8px;
-  padding: 10px 20px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
   border: none;
-  background-color: #4CAF50;
+  border-radius: 12px;
+  padding: 12px 24px;
   color: white;
-  font-size: 16px;
+  font-size: 18px;
+  font-family: 'Segoe UI', sans-serif;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background 0.3s ease;
 }
 
-.options {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px; 
+.options button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #ff4e9b, #ff5c7c);
+}
+
