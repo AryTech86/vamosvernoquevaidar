@@ -1,0 +1,130 @@
+body {
+  background: url("https://diariodonordeste.verdesmares.com.br/image/contentid/policy:1.3274617:1662300693/shutterstock_1971700058.jpg") no-repeat center
+    center fixed;
+  background-size: cover;
+  margin: 20px;
+}
+
+.logo {
+  text-align: end;
+} 
+
+.logo img {
+  width: 40%;
+}
+
+
+/* Caixa principal do jogo */
+.conteudo-jogo {
+  background: rgba(0, 0, 0, 0.8);
+  margin: 30px;
+  padding: 20px;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.conteudo-jogo {
+  box-shadow: -5px -5px 30px 5px white, 5px 5px 30px 5px white;
+}
+
+/* Títulos e textos */
+h1,
+p {
+  color: darkturquoise;
+  text-align: center;
+  width: 50%;
+  margin: 100px;
+  padding: 0px;
+  max-width: 110%;
+  font-family: 'p', sans-serif;
+  font-size: 50x;
+  
+  
+}
+
+/* Estrutura do questionário */
+.questionario {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: 35%;
+  max-width: 35%;
+  text-align: center;
+}
+
+/* Área de conteúdo */
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+  gap: 20px;
+  text-align: center;
+  width: 80%;
+}
+
+/* Estilo da pergunta */
+.pergunta {
+  width: 100%;
+  padding: 0px;
+  font-weight: 800;
+  color: darkturquoise;
+  font-family: "perg", sans-serif;
+  font-size: 18x;
+ 
+}
+
+/* Progresso da pergunta */
+.progresso {
+  text-align: end;
+  font-size: small;
+  font-weight: 500;
+  color: aquamarine;
+}
+
+/* Área das respostas */
+.respostas {
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+ 
+  
+}
+
+/* Botões de resposta */
+.botao-resposta {
+  width: 100%;
+  cursor: pointer;
+  background: hotpink;
+  color: white;
+  font-size: 16px;
+  font-weight: 800;
+  max-width: 100%;
+  height: 6vh;
+  justify-content: center;
+  
+}
+
+.botao-resposta:hover {
+  background: darkturquoise;
+  font-weight: 600;
+  
+}
+
+/* Tela de fim do jogo */
+.fim {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.fim span {
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 800;
+  font-size: 30px;
+  color: darkturquoise;
+}
